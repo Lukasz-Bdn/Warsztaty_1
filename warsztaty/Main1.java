@@ -1,5 +1,6 @@
 package warsztaty;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,10 +10,27 @@ public class Main1 {
     	guessNumber();
     }
     static void guessNumber() {
-    	Scanner number = new Scanner(System.in);
     	Random r = new Random();
-    	int randInt = r.nextInt(100)+1;
-    	System.out.println("Zgadnij liczbe! (z zakresu 1-100");
+    	int number = r.nextInt(101);
+    	System.out.println(number);
+    	int answer = -1;
+    	
+    	Scanner scan = new Scanner(System.in);
+    	while (number !=answer) {
+    		System.out.println("Zgadnij liczbe");
+    		try {
+				answer = scan.nextInt();
+				if (answer>number) {
+					System.out.println("Za duzo");
+				} else if (answer < number){
+					System.out.println("Za malo");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("To nie jest liczba");
+				scan.nextLine();
+			}
+    	}
+    	System.out.println("Zgadles");
+    	scan.close();
     }
-    
 }
